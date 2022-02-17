@@ -7,13 +7,13 @@ import Places from "../components/Places"
 
 const Home: FC = () => {
   const [places, setPlaces] = useState<any>([])
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<any>(null)
 
   useEffect(() => {
     const fetchPlaces = async () => {
-      setLoading(true)
       try {
+        setLoading(true)
         const { data } = await axios.get(
           " https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
         )
@@ -38,6 +38,8 @@ const Home: FC = () => {
         <Container>
           {loading ? (
             <h1>Loading...</h1>
+          ) : error ? (
+            <h1>{error}</h1>
           ) : (
             <div className="show-places">
               <h3 className="places-heading">{places.length} allogi trovati</h3>

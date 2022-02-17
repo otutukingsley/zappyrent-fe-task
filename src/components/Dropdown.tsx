@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react"
-import Arrow from "../assets/images/arrow.svg"
+import { FaAngleDown } from "react-icons/fa"
 
 interface DropdownProps {
   items: any
@@ -52,11 +52,7 @@ const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
           <p>Tipologia</p>
         </div>
         <div className="dropdown-arrow">
-          <img
-            src={Arrow}
-            className={`arrow-down ${open ? "rotate-svg" : ""}`}
-            alt="arrow down"
-          />
+          <FaAngleDown className={`arrow-down ${open ? "rotate-svg" : ""}`} />
         </div>
       </div>
       {open && (

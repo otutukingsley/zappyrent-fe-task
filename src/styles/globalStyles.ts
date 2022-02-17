@@ -36,7 +36,7 @@ input[type="checkbox"] {
   font: inherit;
   width: 1.40rem;
   height: 1.40rem;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
+  border: 1px solid ${({ theme }) => theme.colors.borderGrey};
   border-radius: 0.35rem;
   transform: translateY(-0.075rem);
   display: grid;
@@ -81,7 +81,7 @@ select::-ms-expand {
 .form-group-select {
   width: 100%;
   min-width: 15ch;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
+  border: 1px solid ${({ theme }) => theme.colors.borderGrey};
   border-radius: 1.25rem;
   color: ${({ theme }) => theme.colors.grey};
   padding: 0.8rem;
@@ -113,7 +113,7 @@ select::-ms-expand {
   width: 12.5rem;
   top: 0;
   margin-top: 55px;
-  border: 1px solid ${({ theme }) => theme.colors.grey};
+  border: 1px solid ${({ theme }) => theme.colors.borderGrey};
   border-radius: 1rem;
   padding: 0.8rem;
   display: block;
@@ -211,7 +211,7 @@ select::-ms-expand {
   font-size: 1.25rem;
 }
 .pricing-line{
-  border-top: 1px solid ${({ theme }) => theme.colors.grey};
+  border-top: 1px solid ${({ theme }) => theme.colors.borderGrey};
   display: block;
   width: 100%;
 }
@@ -247,14 +247,79 @@ select::-ms-expand {
 }
 .modal-wrapper {
   width: 40rem;
-  height: 34.5rem;
+  height: 40.5rem;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: ${({ theme }) => theme.colors.black};
   position: relative;
   z-index: 1000;
   border-radius: 1rem;
-  padding: 1.313rem 1rem;
+  padding: 1.313rem 0;
+  text-align: center;
+}
+.close{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1.75rem;
+}
+.close-icon{
+  cursor: pointer;
+}
+.modal-content{
+  display: block;
+  width: 100%;
+  margin: 0;
+  color: inherit;
+  padding: 0 1rem;
+}
+.modal-img-container{
+  height: 9.75rem;
+  width: 100%;
+  display: block;
+  margin-top: 1.875rem;
+  margin-bottom: 1.563rem;
+}
+.modal-img{
+  height: 9.75rem;
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+.modal-desc{
+  margin-bottom:1.563rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 1.5rem;
+}
+.modal-address{
+  margin-bottom: 1.375rem;
+  font-weight: 600;
+}
+.modal-text{
+  font-weight: 400;
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+.modal-pricing{
+  padding: 1.438rem 0;
+  border-top: 1px solid ${({ theme }) => theme.colors.borderGrey};
+}
+.btn{
+  padding: 1rem 5.375rem;
+  border: none;
+  outline: none;
+  border-radius: 2rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-green{
+  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.green};
 }
 `
 export const Container = styled.div`
