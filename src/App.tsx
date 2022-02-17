@@ -1,5 +1,5 @@
 import React from "react"
-import { Routes, Route, useLocation } from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 import "./App.css"
 import Modal from "./components/Modal"
 import Home from "./screens/Home"

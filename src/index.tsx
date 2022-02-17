@@ -4,20 +4,19 @@ import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "./styles/globalStyles"
 import { theme } from "./styles/colorThemes"
-import { Provider } from "react-redux"
-import store from "./store/store"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
+import { PlaceState } from "./context/placeState"
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
+      <PlaceState>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <App />
         </ThemeProvider>
-      </Provider>
+      </PlaceState>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

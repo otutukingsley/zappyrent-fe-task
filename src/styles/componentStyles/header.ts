@@ -37,3 +37,12 @@ export const HeaderActions = styled.div`
   margin-bottom: 3.438rem;
   grid-gap: 2.313rem;
 `
+export const MyLogo = styled.img`
+  width: 100%;
+  margin: 0;
+`
+export const MyLogoContainer = styled.div`
+  margin: 0;
+  width: 6.563rem;
+  padding: 0;
+`

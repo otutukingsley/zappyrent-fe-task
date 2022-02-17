@@ -1,44 +1,50 @@
-import React, { FC, useState } from "react"
+import React, { FC, useState, useContext, useEffect, ChangeEvent } from "react"
 import { FaAngleDown } from "react-icons/fa"
+import PlaceContext from "../context/placeContext"
+import * as actionTypes from "../context/types"
 
-interface DropdownProps {
-  items: any
+interface Props {
   multiple: boolean
 }
 
-const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
+const Dropdown: FC<Props> = ({ multiple }) => {
+  const context = useContext(PlaceContext)
+  const { state } = context ? context : null!
+  const { loading, items } = state
   const [open, setOpen] = useState<boolean>(false)
   const [selected, setSelected] = useState<any>([])
   const [onSelect, setOnSelect] = useState<any>("")
-  const toggle = () => setOpen(!open)
+  const [option, setOption] = useState<boolean>(false)
 
-  const handleOnclick = (item: any) => {
-    if (!selected.some((current: any) => current.id === item.id)) {
-      if (!multiple) {
-        setSelected([item])
-      } else if (multiple) {
-        setSelected([...selected, item])
-      }
+  const toggle = () => {
+    if (loading) {
+      return
+    } else {
+      setOpen(!open)
+    }
+  }
+
+  const handleMultipleSelect = (itemType: any) => {
+    if (!selected.some((current: any) => current === itemType)) {
+      setSelected([...selected, itemType])
     } else {
       let selectionAfterRemove: any = selected
       selectionAfterRemove = selectionAfterRemove.filter(
-        (current: any) => current.id !== item.id
+        (current: any) => current !== itemType
       )
       setSelected([...selectionAfterRemove])
     }
   }
 
   const isItemSelected = (item: any) => {
-    if (selected.find((current: any) => current.id === item.id)) {
+    if (selected.find((current: any) => current === item)) {
       return true
     } else {
       return false
     }
   }
 
-  const onChange = (item: any) => {
-    console.log("changed")
-  }
+  console.log(selected)
 
   return (
     <div className="form-group-select">
@@ -58,23 +64,34 @@ const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
       {open && (
         <>
           <ul className="house-choices">
-            {items.map((item: any) => (
-              <li key={item.id} className="house-choices-item">
-                {/* <button type="button" onClick={() => handleOnclick(item)}>
-                  <span>{item.value}</span>
-                  <span>{isItemSelected(item) && "Selected"}</span>
-                </button> */}
-                <label className="label-control">
-                  <input
-                    type="checkbox"
-                    name="available"
-                    value={onSelect}
-                    onChange={onChange}
-                  />
-                  Private Room
-                </label>
-              </li>
-            ))}
+            {!loading &&
+              items.length > 0 &&
+              items
+                .map((item: any) => item.type)
+                .filter(
+                  (item: string, index: number, array: string[]) =>
+                    array.indexOf(item) === index
+                )
+                .map((itemType: string, index: number) => (
+                  <li key={itemType + index} className="house-choices-item">
+                    <button
+                      type="button"
+                      className="custom-btn-checkbox"
+                      onClick={() => handleMultipleSelect(itemType)}
+                    >
+                      <div className="check-box isChecked">
+                        <div
+                          className={`checkbox-inner ${
+                            isItemSelected(itemType)
+                              ? "is-checked"
+                              : "not-checked"
+                          }`}
+                        ></div>
+                      </div>
+                      <span>{itemType}</span>
+                    </button>
+                  </li>
+                ))}
           </ul>
         </>
       )}
@@ -83,3 +100,15 @@ const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
 }
 
 export default Dropdown
+
+// <li key={item.id} className="house-choices-item">
+//   {/* <button type="button" onClick={() => handleOnclick(item)}>
+//   <span>{item.value}</span>
+//   <span>{isItemSelected(item) && "Selected"}</span>
+// </button> */}
+//   {/* <label className="label-control">
+//     <input type="checkbox" name="available" value={onSelect} />
+//     {item.type}
+//   </label> */}
+
+// </li>

@@ -1,37 +1,45 @@
-import React, { FC, useState, useEffect } from "react"
+import React, { FC, useEffect, useContext } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { FaTimes } from "react-icons/fa"
 import axios from "axios"
+import { Loader, Center } from "../styles/componentStyles/loader"
+import PlaceContext from "../context/placeContext"
+import * as actionTypes from "../context/types"
 
 const Modal: FC = () => {
   const navigate = useNavigate()
   const { id } = useParams<"id">()
-  const [place, setPlace] = useState<any>(null)
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<any>(null)
+  const context = useContext(PlaceContext)
+  const { state, dispatch } = context ? context : null!
+  const { single, item, error } = state
 
   useEffect(() => {
     const fetchPlace = async () => {
       try {
-        setLoading(true)
+        dispatch({
+          type: actionTypes.GET_A_PLACE_REQUEST,
+        })
         const { data } = await axios.get(
           `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties/${id}`
         )
-        setPlace(data)
-        setLoading(false)
+        dispatch({
+          type: actionTypes.GET_A_PLACE_SUCCESS,
+          payload: data,
+        })
       } catch (err: any) {
-        setLoading(false)
-        if (err.response && err.response.data.message) {
-          setError(err.response.data.message)
-        } else {
-          setError(err.message)
-        }
+        dispatch({
+          type: actionTypes.GET_A_PLACE_ERROR,
+          payload:
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message,
+        })
       }
     }
     if (id) {
       fetchPlace()
     }
-  }, [id])
+  }, [dispatch, id])
 
   const handleDismiss = () => {
     console.log("dismissed")
@@ -41,8 +49,10 @@ const Modal: FC = () => {
   return (
     <div className="background" onClick={handleDismiss}>
       <div className="modal-wrapper">
-        {loading ? (
-          <h1>Loading...</h1>
+        {single ? (
+          <Center>
+            <Loader />
+          </Center>
         ) : error ? (
           <h1>{error}</h1>
         ) : (
@@ -51,33 +61,33 @@ const Modal: FC = () => {
               <div className="close">
                 <FaTimes className="close-icon" />
               </div>
-              <h3 className="modal-title">{place.title}</h3>
+              <h3 className="modal-title">{item.title}</h3>
               <div className="modal-img-container">
                 <img
-                  src={place.images[0].url}
-                  alt={place.name}
+                  src={item.images[0].url}
+                  alt={item.name}
                   className="modal-img"
                 />
               </div>
               <ul className="modal-desc">
                 <li className="modal-desc-item">
-                  <span className="desc-num">{place.tenants}</span> inquilini
+                  <span className="desc-num">{item.tenants}</span> inquilini
                 </li>
                 <li className="modal-desc-item">
-                  <span className="desc-num">{place.baths}</span> bagno
+                  <span className="desc-num">{item.baths}</span> bagno
                 </li>
                 <li className="modal-desc-item">
-                  <span className="desc-num">{place.beds}</span> letto
+                  <span className="desc-num">{item.beds}</span> letto
                 </li>
               </ul>
               <p className="modal-address">
-                {place.street} {place.street_number}, {place.cap} {place.city}
+                {item.street} {item.street_number}, {item.cap} {item.city}
               </p>
-              <p className="modal-text">{place.description}</p>
+              <p className="modal-text">{item.description}</p>
             </div>
             <div className="modal-pricing">
               <span className="rent">canone d'affitto</span>{" "}
-              <span className="rent-price">&euro; {place.price} /mese</span>
+              <span className="rent-price">&euro; {item.price} /mese</span>
             </div>
             <button type="button" className="btn btn-block btn-green">
               Prenota allogio

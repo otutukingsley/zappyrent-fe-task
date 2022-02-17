@@ -321,6 +321,41 @@ select::-ms-expand {
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.green};
 }
+.custom-btn-checkbox{
+  border: none;
+  display: block;
+  width: 100%;
+  font-size: inherit;
+  color: inherit;
+  padding: 0.3rem;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  grid-gap: 0.5em;
+}
+.check-box{
+  margin: 0;
+  font: inherit;
+  width: 1.40rem;
+  height: 1.40rem;
+  border: 1px solid ${({ theme }) => theme.colors.borderGrey};
+  border-radius: 0.35rem;
+  padding: 0.2rem
+}
+.checkbox-inner{
+  height: 100%;
+  border-radius: 0.2rem;
+}
+.is-checked{
+  background-color: ${({ theme }) => theme.colors.green};
+}
+.not-checked{
+  background-color: ${({ theme }) => theme.colors.white};
+}
 `
 export const Container = styled.div`
   display: block;
