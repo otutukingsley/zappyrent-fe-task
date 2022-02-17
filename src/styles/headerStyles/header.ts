@@ -34,6 +34,6 @@ export const HeaderActions = styled.div`
   flex-direction: row;
   justify-content: start;
   align-items: center;
-  margin-bottom: 1.563rem;
+  margin-bottom: 3.438rem;
   grid-gap: 2.313rem;
 `

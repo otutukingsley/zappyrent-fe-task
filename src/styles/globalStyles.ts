@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components"
-import { theme, ThemeType } from "./colorThemes"
+import { ThemeType } from "./colorThemes"
 import styled from "styled-components"
 
 export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
@@ -122,6 +122,112 @@ select::-ms-expand {
 }
 .house-choices-item:last-child{
   margin-bottom: 0;
+}
+.main-showcase{
+  display: block;
+  width: 100%;
+  padding: 0 1rem 1rem 1rem;
+}
+.places-heading{
+  font-weight: normal;
+  font-size: inherit;
+  color: ${({ theme }) => theme.colors.black};
+  margin-bottom: 2.313rem;
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+.place-section{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  grid-gap: 1.563rem;
+}
+.place-item{
+  display: block;
+  width: 100%;
+  font-size: 0.94rem;
+}
+.place-card{
+  width: 100%;
+  height: 100%;
+  display: block;
+  font-size: 0.94rem;
+  text-align: left;
+  box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.1);
+  -moz-box-shadow: 0px 1px 5px 1px rgba(0,0,0,0.1);
+  border-radius: 2rem;
+}
+.img-card-container{
+  width: 100%;
+  display: block;
+}
+.place-img{
+  width: 100%;
+  height: 12.313rem;
+  display: block;
+  object-fit: cover;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+}
+.place-desc{
+  padding: 1rem;
+  display: block;
+  width: 100%;
+}
+.place-type{
+  font-weight: normal;
+  font-size: inherit;
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.place-title{
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 1.30rem;
+  text-align: left;
+  display: block;
+  width: 100%;
+  margin-bottom: 1.438rem;
+}
+.details-desc{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  grid-gap: 1.875rem;
+  margin-bottom: 1.438rem;
+}
+.desc-num{
+  color: ${({ theme }) => theme.colors.black};
+  font-size: 1.25rem;
+}
+.pricing-line{
+  border-top: 1px solid ${({ theme }) => theme.colors.grey};
+  display: block;
+  width: 100%;
+}
+.pricing{
+  padding: 1rem;
+  display: flex;
+  flexx-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.rent{
+  color: ${({ theme }) => theme.colors.green};
+  text-transform: capitalize;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.rent-price{
+  font-size: 1.25rem;
+}
+.num-price{
+  font-weight: 600;
 }
 `
 export const Container = styled.div`
