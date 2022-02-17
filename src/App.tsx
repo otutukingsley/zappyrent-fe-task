@@ -1,12 +1,18 @@
 import React from "react"
+import { Routes, Route, useLocation } from "react-router-dom"
 import "./App.css"
+import Modal from "./components/Modal"
 import Home from "./screens/Home"
 
 const App = () => {
   return (
-    <div className="App">
-      <Home />
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="img/:id" element={<Modal />} />
+        </Route>
+      </Routes>
+    </>
   )
 }
 

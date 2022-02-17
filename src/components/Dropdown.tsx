@@ -9,6 +9,7 @@ interface DropdownProps {
 const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
   const [open, setOpen] = useState<boolean>(false)
   const [selected, setSelected] = useState<any>([])
+  const [onSelect, setOnSelect] = useState<any>("")
   const toggle = () => setOpen(!open)
 
   const handleOnclick = (item: any) => {
@@ -33,6 +34,10 @@ const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
     } else {
       return false
     }
+  }
+
+  const onChange = (item: any) => {
+    console.log("changed")
   }
 
   return (
@@ -64,7 +69,12 @@ const Dropdown: FC<DropdownProps> = ({ items, multiple = false }) => {
                   <span>{isItemSelected(item) && "Selected"}</span>
                 </button> */}
                 <label className="label-control">
-                  <input type="checkbox" name="available" />
+                  <input
+                    type="checkbox"
+                    name="available"
+                    value={onSelect}
+                    onChange={onChange}
+                  />
                   Private Room
                 </label>
               </li>

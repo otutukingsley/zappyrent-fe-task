@@ -1,5 +1,6 @@
 import React from "react"
 import ReactDOM from "react-dom"
+import { BrowserRouter } from "react-router-dom"
 import { ThemeProvider } from "styled-components"
 import { GlobalStyles } from "./styles/globalStyles"
 import { theme } from "./styles/colorThemes"
@@ -10,12 +11,14 @@ import reportWebVitals from "./reportWebVitals"
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <App />
-      </ThemeProvider>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <GlobalStyles />
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 )

@@ -8,13 +8,14 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   padding: 0;
   outline:0;
   box-sizing:border-box;
-  font-family: "Inter", sans-serif; 
+  font-family: "Inte", sans-serif; 
  }
  body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${({ theme }) => theme.colors.grey};
   font-size: 1.15rem;
+  position: relative;
 }
 ul{
   list-style: none;
@@ -22,6 +23,10 @@ ul{
 }
 a{
   text-decoration: none;
+  color: inherit;
+}
+.home{
+  position: relative;
 }
 
 input[type="checkbox"] {
@@ -228,6 +233,28 @@ select::-ms-expand {
 }
 .num-price{
   font-weight: 600;
+}
+.background{
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+.modal-wrapper {
+  width: 40rem;
+  height: 34.5rem;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: ${({ theme }) => theme.colors.black};
+  position: relative;
+  z-index: 1000;
+  border-radius: 1rem;
+  padding: 1.313rem 1rem;
 }
 `
 export const Container = styled.div`
