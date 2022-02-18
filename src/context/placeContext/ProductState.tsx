@@ -1,7 +1,7 @@
 import { useReducer } from "react"
 import type { ReactNode } from "react"
-import PlaceContext from "./placeContext"
-import placeReducer from "./placeReducer"
+import ProductContext from "./productContext"
+import productReducer from "./productReducer"
 
 export interface Action {
   type: string
@@ -30,11 +30,11 @@ const initialState = {
   selected: [],
 }
 
-export function PlaceState({ children }: { children: ReactNode }) {
-  const [state, dispatch] = useReducer(placeReducer, initialState)
+export function ProductState({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(productReducer, initialState)
   return (
-    <PlaceContext.Provider value={{ state, dispatch }}>
+    <ProductContext.Provider value={{ state, dispatch }}>
       {children}
-    </PlaceContext.Provider>
+    </ProductContext.Provider>
   )
 }

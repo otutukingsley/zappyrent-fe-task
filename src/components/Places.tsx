@@ -46,7 +46,6 @@ interface PlaceProps {
 }
 
 const Places: FC<PlaceProps> = ({ item }) => {
-  console.log(typeof item.id)
   return (
     <>
       <Link to={`/img/${item.id}`} className="place-item">

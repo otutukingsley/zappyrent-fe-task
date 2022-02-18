@@ -1,6 +1,6 @@
-import { Action, State } from "./placeState"
-import * as actionTypes from "./types"
-const placeReducer = (state: State, action: Action) => {
+import { Action, State } from "./ProductState"
+import * as actionTypes from "../types"
+const productReducer = (state: State, action: Action) => {
   switch (action.type) {
     case actionTypes.GET_PLACES_REQUEST:
       return {
@@ -111,4 +111,4 @@ const placeReducer = (state: State, action: Action) => {
   }
 }
 
-export default placeReducer
+export default productReducer

@@ -6,17 +6,17 @@ import { GlobalStyles } from "./styles/globalStyles"
 import { theme } from "./styles/colorThemes"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
-import { PlaceState } from "./context/placeState"
+import { ProductState } from "./context/placeContext/ProductState"
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <PlaceState>
+      <ProductState>
         <ThemeProvider theme={theme}>
           <GlobalStyles />
           <App />
         </ThemeProvider>
-      </PlaceState>
+      </ProductState>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")

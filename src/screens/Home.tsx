@@ -5,7 +5,7 @@ import Header from "../components/Header"
 import { Container } from "../styles/globalStyles"
 import Places from "../components/Places"
 import { Loader, Center } from "../styles/componentStyles/loader"
-import PlaceContext from "../context/placeContext"
+import ProductContext from "../context/placeContext/productContext"
 import * as actionTypes from "../context/types"
 import {
   HomeSection,
@@ -14,9 +14,10 @@ import {
   ShowPlaces,
 } from "../styles/componentStyles/home"
 import { Error } from "../styles/componentStyles/error"
+import { REQUEST_URL } from "../context/constants"
 
 const Home: FC = () => {
-  const context = useContext(PlaceContext)
+  const context = useContext(ProductContext)
   const { state, dispatch } = context ? context : null!
   const { loading, items, error } = state
   useEffect(() => {
@@ -25,9 +26,7 @@ const Home: FC = () => {
         dispatch({
           type: actionTypes.GET_PLACES_REQUEST,
         })
-        const { data } = await axios.get(
-          "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
-        )
+        const { data } = await axios.get(REQUEST_URL)
         dispatch({
           type: actionTypes.GET_PLACES_SUCCESS,
           payload: data,

@@ -1,6 +1,6 @@
 import React, { FC, useState, useContext, useEffect } from "react"
 import { FaAngleDown } from "react-icons/fa"
-import PlaceContext from "../context/placeContext"
+import ProductContext from "../context/placeContext/productContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
 import {
@@ -12,6 +12,32 @@ import {
   CheckboxInner,
   CheckboxIn,
 } from "../styles/componentStyles/dropdown"
+import { REQUEST_URL } from "../context/constants"
+
+type ImageType = {
+  url: string
+}[]
+
+type ItemProps = {
+  available: boolean
+  baths: number
+  beds: number
+  cap: string
+  city: string
+  country: string
+  currency: string
+  description: string
+  floor: number
+  id: number
+  images: ImageType
+  price: number
+  province: string
+  street: string
+  street_number: number
+  tenants: number
+  title: string
+  type: string
+}
 
 type Link = {
   link: string
@@ -21,9 +47,9 @@ interface DropdownProps {
 }
 
 const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
-  const context = useContext(PlaceContext)
+  const context = useContext(ProductContext)
   const { state, dispatch } = context ? context : null!
-  const { dropLoading, selected, dropdownItems, error } = state
+  const { dropLoading, selected, dropdownItems } = state
   const [open, setOpen] = useState<boolean>(false)
 
   useEffect(() => {
@@ -50,7 +76,8 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
     }
 
     filterPlace()
-  }, [dispatch, requestLink, selected])
+    //eslint-disable-next-line
+  }, [dispatch, selected])
 
   useEffect(() => {
     const fetchPlaces = async () => {
@@ -58,9 +85,7 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
         dispatch({
           type: actionTypes.GET_DROPDOWN_PLACES_REQUEST,
         })
-        const { data } = await axios.get(
-          "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
-        )
+        const { data } = await axios.get(REQUEST_URL)
         dispatch({
           type: actionTypes.GET_DROPDOWN_PLACES_SUCCESS,
           payload: data,
@@ -86,8 +111,8 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
     }
   }
 
-  const handleMultipleSelect = (itemType: any) => {
-    if (!selected.some((current: any) => current === itemType)) {
+  const handleMultipleSelect = (itemType: string) => {
+    if (!selected.some((current: string) => current === itemType)) {
       dispatch({
         type: actionTypes.ADD_SELECTED,
         payload: itemType,
@@ -100,8 +125,8 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
     }
   }
 
-  const isItemSelected = (item: any) => {
-    if (selected.find((current: any) => current === item)) {
+  const isItemSelected = (item: string) => {
+    if (selected.find((current: string) => current === item)) {
       return true
     } else {
       return false
@@ -135,7 +160,7 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
             {!dropLoading &&
               dropdownItems.length > 0 &&
               dropdownItems
-                .map((item: any) => item.type)
+                .map((item: ItemProps) => item.type)
                 .filter(
                   (item: string, index: number, array: string[]) =>
                     array.indexOf(item) === index

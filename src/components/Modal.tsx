@@ -1,9 +1,9 @@
-import React, { FC, useEffect, useContext, useRef, useCallback } from "react"
+import React, { FC, useEffect, useContext, useRef } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { FaTimes } from "react-icons/fa"
 import axios from "axios"
 import { Loader, Center } from "../styles/componentStyles/loader"
-import PlaceContext from "../context/placeContext"
+import ProductContext from "../context/placeContext/productContext"
 import * as actionTypes from "../context/types"
 import {
   Button,
@@ -25,11 +25,12 @@ import {
   Rent,
   RentPrice,
 } from "../styles/componentStyles/home"
+import { Error } from "../styles/componentStyles/error"
 
 const Modal: FC = () => {
   const navigate = useNavigate()
   const { id } = useParams<"id">()
-  const context = useContext(PlaceContext)
+  const context = useContext(ProductContext)
   const { state, dispatch } = context ? context : null!
   const { single, item, error } = state
   const modalRef = useRef<any>(null)
@@ -76,7 +77,7 @@ const Modal: FC = () => {
             <Loader />
           </Center>
         ) : error ? (
-          <h1>{error}</h1>
+          <Error>{error}</Error>
         ) : (
           <>
             <ModalContent>

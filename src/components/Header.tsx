@@ -9,13 +9,13 @@ import {
 } from "../styles/componentStyles/header"
 import Logo from "../assets/images/zappyrent.png"
 import Dropdown from "./Dropdown"
-import PlaceContext from "../context/placeContext"
+import ProductContext from "../context/placeContext/productContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
 import { REQUEST_URL } from "../context/constants"
 
 const Header: FC = () => {
-  const context = useContext(PlaceContext)
+  const context = useContext(ProductContext)
   const { state, dispatch } = context ? context : null!
   const { selected } = state
   const [isChecked, setIsChecked] = useState<boolean>(false)
