@@ -7,6 +7,12 @@ const placeReducer = (state: State, action: Action) => {
         ...state,
         loading: true,
       }
+
+    case actionTypes.SEARCH_LOGS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      }
     case actionTypes.GET_A_PLACE_REQUEST:
       return {
         ...state,
@@ -18,8 +24,15 @@ const placeReducer = (state: State, action: Action) => {
         loading: false,
         items: action.payload,
       }
+    case actionTypes.SEARCH_LOGS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        items: action.payload,
+      }
     case actionTypes.GET_PLACES_ERROR:
     case actionTypes.GET_A_PLACE_ERROR:
+    case actionTypes.SEARCH_LOGS_ERROR:
       return {
         ...state,
         loading: false,

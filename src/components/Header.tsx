@@ -11,6 +11,11 @@ import Logo from "../assets/images/zappyrent.png"
 import Dropdown from "./Dropdown"
 
 const Header: FC = () => {
+  const onClick = () => {
+    console.log("")
+    //link = link in the local storage
+    // if avaialbe is true change to false and append to link list
+  }
   return (
     <Heading>
       <Container>
@@ -26,7 +31,7 @@ const Header: FC = () => {
           <div>
             <label className="label-control">
               Disponibile subito
-              <input type="checkbox" name="available" />
+              <input type="checkbox" name="available" onClick={onClick} />
             </label>
           </div>
         </HeaderActions>

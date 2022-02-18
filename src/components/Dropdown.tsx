@@ -1,7 +1,8 @@
-import React, { FC, useState, useContext, useEffect, ChangeEvent } from "react"
+import React, { FC, useState, useContext, useEffect } from "react"
 import { FaAngleDown } from "react-icons/fa"
 import PlaceContext from "../context/placeContext"
 import * as actionTypes from "../context/types"
+import axios from "axios"
 
 interface Props {
   multiple: boolean
@@ -9,15 +10,70 @@ interface Props {
 
 const Dropdown: FC<Props> = ({ multiple }) => {
   const context = useContext(PlaceContext)
-  const { state } = context ? context : null!
+  const { state, dispatch } = context ? context : null!
   const { loading, items } = state
   const [open, setOpen] = useState<boolean>(false)
   const [selected, setSelected] = useState<any>([])
-  const [onSelect, setOnSelect] = useState<any>("")
-  const [option, setOption] = useState<boolean>(false)
+  const [load, setLoad] = useState<boolean>(true)
+  const [dropDownItems, setDropDownItems] = useState<any>([])
+  const [error, setError] = useState<any>("")
+
+  useEffect(() => {
+    const filterPlace = async () => {
+      let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties`
+      if (selected.length > 0) link += "?"
+      selected.forEach((i: any) => {
+        link += `type=${i}&`
+      })
+
+      if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
+      //store the link in local storage
+      //check if available in local measuring//
+      //if available append the link and request it
+      try {
+        dispatch({
+          type: actionTypes.SEARCH_LOGS_REQUEST,
+        })
+        const { data } = await axios.get(link)
+        dispatch({
+          type: actionTypes.SEARCH_LOGS_SUCCESS,
+          payload: data,
+        })
+      } catch (err: any) {
+        dispatch({
+          type: actionTypes.SEARCH_LOGS_ERROR,
+          payload:
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message,
+        })
+      }
+    }
+    filterPlace()
+  }, [dispatch, selected])
+
+  useEffect(() => {
+    const fetchPlaces = async () => {
+      try {
+        setLoad(true)
+        const { data } = await axios.get(
+          "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
+        )
+        setDropDownItems(data)
+        setLoad(false)
+      } catch (err: any) {
+        if (err.response && err.response.data.message) {
+          setError(err.response.data.message)
+        } else {
+          setError(err.message)
+        }
+      }
+    }
+    fetchPlaces()
+  }, [dispatch])
 
   const toggle = () => {
-    if (loading) {
+    if (load) {
       return
     } else {
       setOpen(!open)
@@ -44,8 +100,6 @@ const Dropdown: FC<Props> = ({ multiple }) => {
     }
   }
 
-  console.log(selected)
-
   return (
     <div className="form-group-select">
       <div
@@ -64,9 +118,9 @@ const Dropdown: FC<Props> = ({ multiple }) => {
       {open && (
         <>
           <ul className="house-choices">
-            {!loading &&
-              items.length > 0 &&
-              items
+            {!load &&
+              dropDownItems.length > 0 &&
+              dropDownItems
                 .map((item: any) => item.type)
                 .filter(
                   (item: string, index: number, array: string[]) =>
@@ -77,7 +131,9 @@ const Dropdown: FC<Props> = ({ multiple }) => {
                     <button
                       type="button"
                       className="custom-btn-checkbox"
-                      onClick={() => handleMultipleSelect(itemType)}
+                      onClick={() => {
+                        handleMultipleSelect(itemType)
+                      }}
                     >
                       <div className="check-box isChecked">
                         <div
@@ -100,15 +156,3 @@ const Dropdown: FC<Props> = ({ multiple }) => {
 }
 
 export default Dropdown
-
-// <li key={item.id} className="house-choices-item">
-//   {/* <button type="button" onClick={() => handleOnclick(item)}>
-//   <span>{item.value}</span>
-//   <span>{isItemSelected(item) && "Selected"}</span>
-// </button> */}
-//   {/* <label className="label-control">
-//     <input type="checkbox" name="available" value={onSelect} />
-//     {item.type}
-//   </label> */}
-
-// </li>
