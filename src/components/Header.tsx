@@ -23,8 +23,8 @@ const Header: FC = () => {
     const filterPlace = async () => {
       let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`
 
-      selected.forEach((i: any) => {
-        link += `type=${i}&`
+      selected.forEach((type: string) => {
+        link += `type=${type}&`
       })
       if (localStorage.getItem("available") === "true" && selected.length > 0) {
         link += "&available=true"
@@ -62,7 +62,7 @@ const Header: FC = () => {
     filterPlace()
   }, [dispatch, selected, isChecked])
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = () => {
     if (isChecked) {
       localStorage.setItem("available", "false")
     } else {
@@ -70,7 +70,6 @@ const Header: FC = () => {
     }
     setIsChecked(!isChecked)
   }
-  console.log(selected)
   return (
     <Heading>
       <Container>
@@ -89,9 +88,7 @@ const Header: FC = () => {
               <input
                 type="checkbox"
                 name="available"
-                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                  onChange(event)
-                }
+                onChange={() => onChange()}
                 checked={isChecked}
               />
             </label>
