@@ -78,6 +78,8 @@ const Modal: FC = () => {
           </Center>
         ) : error ? (
           <Error>{error}</Error>
+        ) : !single && item === null ? (
+          <Error>No Place Found</Error>
         ) : (
           <>
             <ModalContent>

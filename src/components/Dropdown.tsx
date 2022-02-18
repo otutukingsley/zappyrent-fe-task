@@ -76,8 +76,7 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
     }
 
     filterPlace()
-    //eslint-disable-next-line
-  }, [dispatch, selected])
+  }, [dispatch, requestLink, selected])
 
   useEffect(() => {
     const fetchPlaces = async () => {

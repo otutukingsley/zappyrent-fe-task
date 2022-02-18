@@ -1,4 +1,4 @@
-import React, { FC, useContext, useEffect, useState } from "react"
+import React, { FC, useContext, useEffect, useState, useCallback } from "react"
 import { Container } from "../styles/globalStyles"
 import {
   Header as Heading,
@@ -20,25 +20,28 @@ const Header: FC = () => {
   const { selected, available } = state
   const [isChecked, setIsChecked] = useState<boolean>(false)
 
-  const requestLink = (options: string[]) => {
-    let link = REQUEST_URL
+  const requestLink = useCallback(
+    (options: string[]) => {
+      let link = REQUEST_URL
 
-    options.forEach((type: string) => {
-      link += `type=${type}&`
-    })
+      options.forEach((type: string) => {
+        link += `type=${type}&`
+      })
 
-    if (available && options.length > 0) {
-      link += "&available=true"
-    }
+      if (available && options.length > 0) {
+        link += "&available=true"
+      }
 
-    if (available && options.length === 0) {
-      link += "available=true"
-    }
+      if (available && options.length === 0) {
+        link += "available=true"
+      }
 
-    if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
+      if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
 
-    return { link }
-  }
+      return { link }
+    },
+    [available]
+  )
 
   useEffect(() => {
     const filterPlace = async () => {
@@ -64,8 +67,7 @@ const Header: FC = () => {
     }
 
     filterPlace()
-    //eslint-disable-next-line
-  }, [dispatch, selected, isChecked])
+  }, [dispatch, selected, isChecked, requestLink])
 
   const onChange = () => {
     if (isChecked) {

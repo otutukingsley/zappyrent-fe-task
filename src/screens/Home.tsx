@@ -55,6 +55,8 @@ const Home: FC = () => {
             </Center>
           ) : error ? (
             <Error>{error}</Error>
+          ) : !loading && items.length === 0 ? (
+            <Error>No Place Found</Error>
           ) : (
             <ShowPlaces>
               <Listings>{items.length} allogi trovati</Listings>
