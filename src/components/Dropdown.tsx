@@ -4,32 +4,28 @@ import PlaceContext from "../context/placeContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
 
-interface Props {
-  multiple: boolean
-}
-
-const Dropdown: FC<Props> = ({ multiple }) => {
+const Dropdown: FC = () => {
   const context = useContext(PlaceContext)
   const { state, dispatch } = context ? context : null!
-  const { loading, items } = state
+  const { dropLoading, selected, dropdownItems, error } = state
   const [open, setOpen] = useState<boolean>(false)
-  const [selected, setSelected] = useState<any>([])
-  const [load, setLoad] = useState<boolean>(true)
-  const [dropDownItems, setDropDownItems] = useState<any>([])
-  const [error, setError] = useState<any>("")
 
   useEffect(() => {
     const filterPlace = async () => {
-      let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties`
-      if (selected.length > 0) link += "?"
+      let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`
+
+      // if (selected.length > 0) link += "?"
+
       selected.forEach((i: any) => {
         link += `type=${i}&`
       })
 
       if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
       //store the link in local storage
-      //check if available in local measuring//
+      localStorage.setItem("link", link)
+      //check if available in local localStorage//
       //if available append the link and request it
+
       try {
         dispatch({
           type: actionTypes.SEARCH_LOGS_REQUEST,
@@ -48,32 +44,40 @@ const Dropdown: FC<Props> = ({ multiple }) => {
               : err.message,
         })
       }
+      console.log(link)
     }
+
     filterPlace()
   }, [dispatch, selected])
 
   useEffect(() => {
     const fetchPlaces = async () => {
       try {
-        setLoad(true)
+        dispatch({
+          type: actionTypes.GET_DROPDOWN_PLACES_REQUEST,
+        })
         const { data } = await axios.get(
           "https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties"
         )
-        setDropDownItems(data)
-        setLoad(false)
+        dispatch({
+          type: actionTypes.GET_DROPDOWN_PLACES_SUCCESS,
+          payload: data,
+        })
       } catch (err: any) {
-        if (err.response && err.response.data.message) {
-          setError(err.response.data.message)
-        } else {
-          setError(err.message)
-        }
+        dispatch({
+          type: actionTypes.GET_DROPDOWN_PLACES_ERROR,
+          payload:
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message,
+        })
       }
     }
     fetchPlaces()
   }, [dispatch])
 
   const toggle = () => {
-    if (load) {
+    if (dropLoading) {
       return
     } else {
       setOpen(!open)
@@ -82,13 +86,15 @@ const Dropdown: FC<Props> = ({ multiple }) => {
 
   const handleMultipleSelect = (itemType: any) => {
     if (!selected.some((current: any) => current === itemType)) {
-      setSelected([...selected, itemType])
+      dispatch({
+        type: actionTypes.ADD_SELECTED,
+        payload: itemType,
+      })
     } else {
-      let selectionAfterRemove: any = selected
-      selectionAfterRemove = selectionAfterRemove.filter(
-        (current: any) => current !== itemType
-      )
-      setSelected([...selectionAfterRemove])
+      dispatch({
+        type: actionTypes.REMOVE_SELECTED,
+        payload: itemType,
+      })
     }
   }
 
@@ -109,7 +115,13 @@ const Dropdown: FC<Props> = ({ multiple }) => {
         onClick={() => toggle()}
       >
         <div className="">
-          <p>Tipologia</p>
+          <p>
+            {selected.length > 0 && selected.length <= 1
+              ? selected[0]
+              : selected.length > 1
+              ? selected[0] + " +1"
+              : "Tipologia"}
+          </p>
         </div>
         <div className="dropdown-arrow">
           <FaAngleDown className={`arrow-down ${open ? "rotate-svg" : ""}`} />
@@ -118,9 +130,9 @@ const Dropdown: FC<Props> = ({ multiple }) => {
       {open && (
         <>
           <ul className="house-choices">
-            {!load &&
-              dropDownItems.length > 0 &&
-              dropDownItems
+            {!dropLoading &&
+              dropdownItems.length > 0 &&
+              dropdownItems
                 .map((item: any) => item.type)
                 .filter(
                   (item: string, index: number, array: string[]) =>

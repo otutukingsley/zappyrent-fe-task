@@ -10,9 +10,13 @@ export interface Action {
 export interface State {
   loading: boolean
   single: boolean
+  dropLoading: boolean
   error: string
   items: any
   item: any
+  dropdownItems: any
+  selected: any
+  link: string
 }
 export type Dispatch = (action: Action) => void
 
@@ -20,8 +24,12 @@ const initialState = {
   loading: true,
   error: null,
   items: [],
+  dropdownItems: [],
   item: null,
   single: true,
+  dropLoading: true,
+  selected: [],
+  link: `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`,
 }
 
 export function PlaceState({ children }: { children: ReactNode }) {

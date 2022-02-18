@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useContext } from "react"
+import React, { FC, useEffect, useContext, useRef, useCallback } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { FaTimes } from "react-icons/fa"
 import axios from "axios"
@@ -12,6 +12,7 @@ const Modal: FC = () => {
   const context = useContext(PlaceContext)
   const { state, dispatch } = context ? context : null!
   const { single, item, error } = state
+  const modalRef = useRef<any>(null)
 
   useEffect(() => {
     const fetchPlace = async () => {
@@ -41,13 +42,14 @@ const Modal: FC = () => {
     }
   }, [dispatch, id])
 
-  const handleDismiss = () => {
-    console.log("dismissed")
-    navigate(-1)
+  const handleDismiss = (e: any) => {
+    if (modalRef.current === e.target) {
+      navigate(-1)
+    }
   }
 
   return (
-    <div className="background" onClick={handleDismiss}>
+    <div className="background" onClick={handleDismiss} ref={modalRef}>
       <div className="modal-wrapper">
         {single ? (
           <Center>
@@ -59,7 +61,7 @@ const Modal: FC = () => {
           <>
             <div className="modal-content">
               <div className="close">
-                <FaTimes className="close-icon" />
+                <FaTimes className="close-icon" onClick={() => navigate(-1)} />
               </div>
               <h3 className="modal-title">{item.title}</h3>
               <div className="modal-img-container">

@@ -80,7 +80,7 @@ select::-ms-expand {
 }
 .form-group-select {
   width: 100%;
-  min-width: 15ch;
+  min-width: 13rem;
   border: 1px solid ${({ theme }) => theme.colors.borderGrey};
   border-radius: 1.25rem;
   color: ${({ theme }) => theme.colors.grey};
