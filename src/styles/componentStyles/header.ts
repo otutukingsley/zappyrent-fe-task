@@ -18,6 +18,10 @@ export const Nav = styled.nav`
   justify-content: flex-start;
   padding: 3.125rem 0;
 
+  @media (max-width: 768px) {
+    padding: 1.25rem 0 1.875rem 0;
+  }
+
   .img-container {
     margin: 0;
     width: 6.563rem;
@@ -29,13 +33,28 @@ export const Nav = styled.nav`
   }
 `
 export const HeaderActions = styled.div`
-  padding: 0 2.5rem 1.563rem 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-bottom: 1.563rem;
   display: flex;
   flex-direction: row;
   justify-content: start;
   align-items: center;
   margin-bottom: 3.438rem;
   grid-gap: 2.313rem;
+
+  @media (max-width: 550px) {
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: center;
+  }
+  @media (max-width: 375px) {
+    grid-gap: 1rem;
+  }
+  @media (max-width: 300px) {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
 `
 export const MyLogo = styled.img`
   width: 100%;

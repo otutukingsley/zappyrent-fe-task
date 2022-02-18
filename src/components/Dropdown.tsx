@@ -3,6 +3,15 @@ import { FaAngleDown } from "react-icons/fa"
 import PlaceContext from "../context/placeContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
+import {
+  FGselect,
+  DownArrow,
+  HouseChoices,
+  HouseChoicesItem,
+  CustomCheckBox,
+  CheckboxInner,
+  CheckboxIn,
+} from "../styles/componentStyles/dropdown"
 
 const Dropdown: FC = () => {
   const context = useContext(PlaceContext)
@@ -19,10 +28,19 @@ const Dropdown: FC = () => {
       selected.forEach((i: any) => {
         link += `type=${i}&`
       })
+      if (localStorage.getItem("available") === "true" && selected.length > 0) {
+        link += "&available=true"
+      }
+
+      if (
+        localStorage.getItem("available") === "true" &&
+        selected.length === 0
+      ) {
+        link += "available=true"
+      }
 
       if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
       //store the link in local storage
-      localStorage.setItem("link", link)
       //check if available in local localStorage//
       //if available append the link and request it
 
@@ -44,7 +62,6 @@ const Dropdown: FC = () => {
               : err.message,
         })
       }
-      console.log(link)
     }
 
     filterPlace()
@@ -107,14 +124,14 @@ const Dropdown: FC = () => {
   }
 
   return (
-    <div className="form-group-select">
+    <FGselect>
       <div
         tabIndex={0}
         role="button"
         onKeyPress={() => toggle()}
         onClick={() => toggle()}
       >
-        <div className="">
+        <div>
           <p>
             {selected.length > 0 && selected.length <= 1
               ? selected[0]
@@ -123,13 +140,13 @@ const Dropdown: FC = () => {
               : "Tipologia"}
           </p>
         </div>
-        <div className="dropdown-arrow">
+        <DownArrow>
           <FaAngleDown className={`arrow-down ${open ? "rotate-svg" : ""}`} />
-        </div>
+        </DownArrow>
       </div>
       {open && (
         <>
-          <ul className="house-choices">
+          <HouseChoices>
             {!dropLoading &&
               dropdownItems.length > 0 &&
               dropdownItems
@@ -139,31 +156,33 @@ const Dropdown: FC = () => {
                     array.indexOf(item) === index
                 )
                 .map((itemType: string, index: number) => (
-                  <li key={itemType + index} className="house-choices-item">
-                    <button
+                  <HouseChoicesItem
+                    key={itemType + index}
+                    className="house-choices-item"
+                  >
+                    <CustomCheckBox
                       type="button"
-                      className="custom-btn-checkbox"
                       onClick={() => {
                         handleMultipleSelect(itemType)
                       }}
                     >
-                      <div className="check-box isChecked">
-                        <div
+                      <CheckboxIn>
+                        <CheckboxInner
                           className={`checkbox-inner ${
                             isItemSelected(itemType)
                               ? "is-checked"
                               : "not-checked"
                           }`}
-                        ></div>
-                      </div>
+                        ></CheckboxInner>
+                      </CheckboxIn>
                       <span>{itemType}</span>
-                    </button>
-                  </li>
+                    </CustomCheckBox>
+                  </HouseChoicesItem>
                 ))}
-          </ul>
+          </HouseChoices>
         </>
       )}
-    </div>
+    </FGselect>
   )
 }
 

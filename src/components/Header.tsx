@@ -17,68 +17,58 @@ const Header: FC = () => {
   const context = useContext(PlaceContext)
   const { state, dispatch } = context ? context : null!
   const { selected, error } = state
+  const [isChecked, setIsChecked] = useState<boolean>(false)
 
-  // useEffect(() => {
-  //   const filterPlace = async () => {
-  //     let link: any = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties`
+  useEffect(() => {
+    const filterPlace = async () => {
+      let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`
 
-  //     if (!localStorage.getItem("link")) {
-  //       if (selected.length > 0) {
-  //         link += "?"
-  //         selected.forEach((i: any) => {
-  //           link += `${i}=true&`
-  //         })
-  //         if (link[link.length - 1] === "&") {
-  //           link = link.slice(0, link.length - 1)
-  //         }
-  //       }
-  //     } else {
-  //       link = localStorage.getItem("link")
-  //       if (link[link.length - 1] !== "&") {
-  //         link += "&"
-  //         link += "available=true"
-  //       }
-  //       console.log(link)
-  //     }
-  //     if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
-  //     //store the link in local storage
-  //     localStorage.setItem("link", link)
-  //     //check if available in local localStorage//
-  //     //if available append the link and request it
-  //     try {
-  //       dispatch({
-  //         type: actionTypes.SEARCH_LOGS_REQUEST,
-  //       })
-  //       const { data } = await axios.get(link)
-  //       dispatch({
-  //         type: actionTypes.SEARCH_LOGS_SUCCESS,
-  //         payload: data,
-  //       })
-  //     } catch (err: any) {
-  //       dispatch({
-  //         type: actionTypes.SEARCH_LOGS_ERROR,
-  //         payload:
-  //           err.response && err.response.data.message
-  //             ? err.response.data.message
-  //             : err.message,
-  //       })
-  //     }
-  //   }
-  //   filterPlace()
-  // }, [dispatch, selected])
+      selected.forEach((i: any) => {
+        link += `type=${i}&`
+      })
+      if (localStorage.getItem("available") === "true" && selected.length > 0) {
+        link += "&available=true"
+      }
+
+      if (
+        localStorage.getItem("available") === "true" &&
+        selected.length === 0
+      ) {
+        link += "available=true"
+      }
+
+      if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
+
+      try {
+        dispatch({
+          type: actionTypes.SEARCH_LOGS_REQUEST,
+        })
+        const { data } = await axios.get(link)
+        dispatch({
+          type: actionTypes.SEARCH_LOGS_SUCCESS,
+          payload: data,
+        })
+      } catch (err: any) {
+        dispatch({
+          type: actionTypes.SEARCH_LOGS_ERROR,
+          payload:
+            err.response && err.response.data.message
+              ? err.response.data.message
+              : err.message,
+        })
+      }
+    }
+
+    filterPlace()
+  }, [dispatch, selected, isChecked])
 
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!selected.some((current: any) => current === event.target.name)) {
-      dispatch({
-        type: actionTypes.ADD_SELECTED,
-        payload: event.target.name,
-      })
+    if (isChecked) {
+      localStorage.setItem("available", "false")
     } else {
-      dispatch({
-        type: actionTypes.REMOVE_SELECTED,
-        payload: event.target.name,
-      })
+      localStorage.setItem("available", "true")
     }
+    setIsChecked(!isChecked)
   }
   console.log(selected)
   return (
@@ -93,7 +83,7 @@ const Header: FC = () => {
           <div>
             <Dropdown />
           </div>
-          <div>
+          <div className="available">
             <label className="label-control">
               Disponibile subito
               <input
@@ -102,6 +92,7 @@ const Header: FC = () => {
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                   onChange(event)
                 }
+                checked={isChecked}
               />
             </label>
           </div>

@@ -14,7 +14,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: ThemeType }>`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: ${({ theme }) => theme.colors.grey};
-  font-size: 1.15rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.15rem);
   position: relative;
 }
 ul{
@@ -27,6 +27,12 @@ a{
 }
 .home{
   position: relative;
+}
+
+.available{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 input[type="checkbox"] {
@@ -93,41 +99,7 @@ select::-ms-expand {
 .rotate-svg {
   transform: rotate(180deg);
 }
-.dropdown-arrow{
-  position: absolute;
-  right: 5%;
-  top: 55%;
-  transform: translateY(-50%);
-  transition: all 300ms ease-in-out;
-}
-.arrow-down{
- transition: all 300ms ease-in-out;
- width: 100%;
- height: 100%;
-}
-.house-choices{
-  position: absolute;
-  z-index: 10;
-  left: 0;
-  right: 0;
-  width: 12.5rem;
-  top: 0;
-  margin-top: 55px;
-  border: 1px solid ${({ theme }) => theme.colors.borderGrey};
-  border-radius: 1rem;
-  padding: 0.8rem;
-  display: block;
-  background-color: ${({ theme }) => theme.colors.white};
-}
-.house-choices-item{
-  margin-bottom: 1rem;
-  display: block;
-  width: 100%;
-  cursor: pointer;
-}
-.house-choices-item:last-child{
-  margin-bottom: 0;
-}
+
 .main-showcase{
   display: block;
   width: 100%;
@@ -320,35 +292,6 @@ select::-ms-expand {
 .btn-green{
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.green};
-}
-.custom-btn-checkbox{
-  border: none;
-  display: block;
-  width: 100%;
-  font-size: inherit;
-  color: inherit;
-  padding: 0.3rem;
-  background-color: transparent;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: stretch;
-  grid-gap: 0.5em;
-}
-.check-box{
-  margin: 0;
-  font: inherit;
-  width: 1.40rem;
-  height: 1.40rem;
-  border: 1px solid ${({ theme }) => theme.colors.borderGrey};
-  border-radius: 0.35rem;
-  padding: 0.2rem
-}
-.checkbox-inner{
-  height: 100%;
-  border-radius: 0.2rem;
 }
 .is-checked{
   background-color: ${({ theme }) => theme.colors.green};
