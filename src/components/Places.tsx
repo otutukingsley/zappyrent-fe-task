@@ -16,17 +16,43 @@ import {
 } from "../styles/componentStyles/home"
 import { Heading } from "../styles/globalStyles"
 
+type ImageType = {
+  url: string
+}[]
+
+type ItemProps = {
+  available: boolean
+  baths: number
+  beds: number
+  cap: string
+  city: string
+  country: string
+  currency: string
+  description: string
+  floor: number
+  id: number
+  images: ImageType
+  price: number
+  province: string
+  street: string
+  street_number: number
+  tenants: number
+  title: string
+  type: string
+}
+
 interface PlaceProps {
-  item: any
+  item: ItemProps
 }
 
 const Places: FC<PlaceProps> = ({ item }) => {
+  console.log(typeof item.id)
   return (
     <>
       <Link to={`/img/${item.id}`} className="place-item">
         <PlaceCards>
           <CardImgContainer>
-            <CardImg src={item.images[0].url} alt={item.name} />
+            <CardImg src={item.images[0].url} alt={item.title} />
           </CardImgContainer>
           <PlaceDesc>
             <Type>{item.type}</Type>

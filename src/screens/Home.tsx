@@ -13,6 +13,7 @@ import {
   MainShowcase,
   ShowPlaces,
 } from "../styles/componentStyles/home"
+import { Error } from "../styles/componentStyles/error"
 
 const Home: FC = () => {
   const context = useContext(PlaceContext)
@@ -44,7 +45,7 @@ const Home: FC = () => {
     fetchPlaces()
   }, [dispatch])
   return (
-    <div className="home">
+    <>
       <Outlet />
       <Header />
       <MainShowcase>
@@ -54,7 +55,7 @@ const Home: FC = () => {
               <Loader />
             </Center>
           ) : error ? (
-            <h1>{error}</h1>
+            <Error>{error}</Error>
           ) : (
             <ShowPlaces>
               <Listings>{items.length} allogi trovati</Listings>
@@ -67,7 +68,7 @@ const Home: FC = () => {
           )}
         </Container>
       </MainShowcase>
-    </div>
+    </>
   )
 }
 

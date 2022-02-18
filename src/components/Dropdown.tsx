@@ -13,7 +13,14 @@ import {
   CheckboxIn,
 } from "../styles/componentStyles/dropdown"
 
-const Dropdown: FC = () => {
+type Link = {
+  link: string
+}
+interface DropdownProps {
+  requestLink: (options: string[]) => Link
+}
+
+const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
   const context = useContext(PlaceContext)
   const { state, dispatch } = context ? context : null!
   const { dropLoading, selected, dropdownItems, error } = state
@@ -21,26 +28,7 @@ const Dropdown: FC = () => {
 
   useEffect(() => {
     const filterPlace = async () => {
-      let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`
-
-      // if (selected.length > 0) link += "?"
-
-      selected.forEach((i: any) => {
-        link += `type=${i}&`
-      })
-      if (localStorage.getItem("available") === "true" && selected.length > 0) {
-        link += "&available=true"
-      }
-
-      if (
-        localStorage.getItem("available") === "true" &&
-        selected.length === 0
-      ) {
-        link += "available=true"
-      }
-
-      if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
-
+      const { link } = requestLink(selected)
       try {
         dispatch({
           type: actionTypes.SEARCH_LOGS_REQUEST,
@@ -62,7 +50,7 @@ const Dropdown: FC = () => {
     }
 
     filterPlace()
-  }, [dispatch, selected])
+  }, [dispatch, requestLink, selected])
 
   useEffect(() => {
     const fetchPlaces = async () => {

@@ -12,33 +12,37 @@ import Dropdown from "./Dropdown"
 import PlaceContext from "../context/placeContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
+import { REQUEST_URL } from "../context/constants"
 
 const Header: FC = () => {
   const context = useContext(PlaceContext)
   const { state, dispatch } = context ? context : null!
-  const { selected, error } = state
+  const { selected } = state
   const [isChecked, setIsChecked] = useState<boolean>(false)
+
+  const requestLink = (options: string[]) => {
+    let link = REQUEST_URL
+
+    options.forEach((type: string) => {
+      link += `type=${type}&`
+    })
+
+    if (localStorage.getItem("available") === "true" && options.length > 0) {
+      link += "&available=true"
+    }
+
+    if (localStorage.getItem("available") === "true" && options.length === 0) {
+      link += "available=true"
+    }
+
+    if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
+
+    return { link }
+  }
 
   useEffect(() => {
     const filterPlace = async () => {
-      let link = `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`
-
-      selected.forEach((type: string) => {
-        link += `type=${type}&`
-      })
-      if (localStorage.getItem("available") === "true" && selected.length > 0) {
-        link += "&available=true"
-      }
-
-      if (
-        localStorage.getItem("available") === "true" &&
-        selected.length === 0
-      ) {
-        link += "available=true"
-      }
-
-      if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
-
+      const { link } = requestLink(selected)
       try {
         dispatch({
           type: actionTypes.SEARCH_LOGS_REQUEST,
@@ -80,7 +84,7 @@ const Header: FC = () => {
         </Nav>
         <HeaderActions>
           <div>
-            <Dropdown />
+            <Dropdown requestLink={requestLink} />
           </div>
           <div className="available">
             <label className="label-control">
