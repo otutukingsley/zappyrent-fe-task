@@ -108,4 +108,5 @@ export const RentPrice = styled.p`
 `
 export const NumPrice = styled.span`
   font-weight: 600;
+  color: ${({ theme }) => theme.colors.black};
 `

@@ -30,7 +30,7 @@ const Places: FC<PlaceProps> = ({ item }) => {
           </CardImgContainer>
           <PlaceDesc>
             <Type>{item.type}</Type>
-            <Heading>{item.title}</Heading>
+            <Heading className="h-margin">{item.title}</Heading>
             <Details>
               <li>
                 <DescNum className="desc-num">{item.tenants}</DescNum> inquilini

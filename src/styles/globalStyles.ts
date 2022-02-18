@@ -68,22 +68,7 @@ input[type="checkbox"]:checked::before {
   grid-gap: 0.5rem;
   cursor: pointer;
 }
-select{
-  appearance: none;
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
-  margin: 0;
-  width: 100%;
-  font-family: inherit;
-  font-size: inherit;
-  cursor: inherit;
-  line-height: inherit;
-  outline: none;
-}
-select::-ms-expand {
-  display: none;
-}
+
 .rotate-svg {
   transform: rotate(180deg);
 }
@@ -93,99 +78,34 @@ select::-ms-expand {
   width: 100%;
   font-size: clamp(0.85rem, 2.5vw, 0.95rem);
 }
-
-.background{
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  position: fixed;
-  z-index: 200;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-}
-.modal-wrapper {
-  width: 40rem;
-  height: 40.5rem;
-  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
-  background: #fff;
-  color: ${({ theme }) => theme.colors.black};
-  position: relative;
-  z-index: 1000;
-  border-radius: 1rem;
-  padding: 1.313rem 0;
-  text-align: center;
-}
-.close{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 1.75rem;
-}
 .close-icon{
   cursor: pointer;
 }
-.modal-content{
-  display: block;
-  width: 100%;
-  margin: 0;
-  color: inherit;
-  padding: 0 1rem;
+
+.text-center{
+  text-align: center;
 }
-.modal-img-container{
-  height: 9.75rem;
-  width: 100%;
-  display: block;
-  margin-top: 1.875rem;
-  margin-bottom: 1.563rem;
-}
-.modal-img{
-  height: 9.75rem;
-  width: 100%;
-  display: block;
-  object-fit: cover;
-}
-.modal-desc{
-  margin-bottom:1.563rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  grid-gap: 1.5rem;
-}
-.modal-address{
-  margin-bottom: 1.375rem;
-  font-weight: 600;
-}
-.modal-text{
-  font-weight: 400;
-  font-size: 0.95rem;
-  margin-bottom: 1.75rem;
-}
-.modal-pricing{
-  padding: 1.438rem 0;
-  border-top: 1px solid ${({ theme }) => theme.colors.borderGrey};
-}
-.btn{
-  padding: 1rem 5.375rem;
-  border: none;
-  outline: none;
-  border-radius: 2rem;
-  font-size: 1.35rem;
-  font-weight: 600;
-  cursor: pointer;
-}
+
 .btn-green{
   color: ${({ theme }) => theme.colors.white};
   background-color: ${({ theme }) => theme.colors.green};
 }
+
 .is-checked{
   background-color: ${({ theme }) => theme.colors.green};
 }
 .not-checked{
   background-color: ${({ theme }) => theme.colors.white};
+}
+
+.h-margin{
+  margin-bottom: 1.438rem;
+}
+.margin-text{
+   margin-bottom: 1.438rem;
+   @media (max-width: 405px){
+     margin-bottom: 1rem;
+   }
 }
 `
 export const Container = styled.div`
@@ -197,8 +117,12 @@ export const Container = styled.div`
 export const Heading = styled.h4`
   color: ${({ theme }) => theme.colors.black};
   font-size: clamp(1.15rem, 2.5vw, 1.2rem);
-  text-align: left;
   display: block;
   width: 100%;
-  margin-bottom: 1.438rem;
+`
+export const HeadingSm = styled.h5`
+  color: ${({ theme }) => theme.colors.black};
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
+  display: block;
+  width: 100%;
 `
