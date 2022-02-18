@@ -9,7 +9,7 @@ import {
 } from "../styles/componentStyles/header"
 import Logo from "../assets/images/zappyrent.png"
 import Dropdown from "./Dropdown"
-import ProductContext from "../context/placeContext/productContext"
+import ProductContext from "../context/productContext/productContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
 import { REQUEST_URL } from "../context/constants"
@@ -17,7 +17,7 @@ import { REQUEST_URL } from "../context/constants"
 const Header: FC = () => {
   const context = useContext(ProductContext)
   const { state, dispatch } = context ? context : null!
-  const { selected } = state
+  const { selected, available } = state
   const [isChecked, setIsChecked] = useState<boolean>(false)
 
   const requestLink = (options: string[]) => {
@@ -27,11 +27,11 @@ const Header: FC = () => {
       link += `type=${type}&`
     })
 
-    if (localStorage.getItem("available") === "true" && options.length > 0) {
+    if (available && options.length > 0) {
       link += "&available=true"
     }
 
-    if (localStorage.getItem("available") === "true" && options.length === 0) {
+    if (available && options.length === 0) {
       link += "available=true"
     }
 
@@ -64,13 +64,18 @@ const Header: FC = () => {
     }
 
     filterPlace()
+    //eslint-disable-next-line
   }, [dispatch, selected, isChecked])
 
   const onChange = () => {
     if (isChecked) {
-      localStorage.setItem("available", "false")
+      dispatch({
+        type: actionTypes.REMOVE_AVAILABLE,
+      })
     } else {
-      localStorage.setItem("available", "true")
+      dispatch({
+        type: actionTypes.SET_AVAILABLE,
+      })
     }
     setIsChecked(!isChecked)
   }

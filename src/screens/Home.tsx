@@ -5,7 +5,7 @@ import Header from "../components/Header"
 import { Container } from "../styles/globalStyles"
 import Places from "../components/Places"
 import { Loader, Center } from "../styles/componentStyles/loader"
-import ProductContext from "../context/placeContext/productContext"
+import ProductContext from "../context/productContext/productContext"
 import * as actionTypes from "../context/types"
 import {
   HomeSection,

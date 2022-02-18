@@ -105,6 +105,16 @@ const productReducer = (state: State, action: Action) => {
           (current: any) => current !== action.payload
         ),
       }
+    case actionTypes.SET_AVAILABLE:
+      return {
+        ...state,
+        available: true,
+      }
+    case actionTypes.REMOVE_AVAILABLE:
+      return {
+        ...state,
+        available: false,
+      }
 
     default:
       return state

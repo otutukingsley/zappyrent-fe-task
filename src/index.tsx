@@ -6,7 +6,7 @@ import { GlobalStyles } from "./styles/globalStyles"
 import { theme } from "./styles/colorThemes"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
-import { ProductState } from "./context/placeContext/ProductState"
+import { ProductState } from "./context/productContext/ProductState"
 
 ReactDOM.render(
   <React.StrictMode>

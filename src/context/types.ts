@@ -21,4 +21,5 @@ export const AVAILABLE_LOGS_ERROR: string = "AVAILABLE_LOGS_ERROR"
 export const ADD_SELECTED: string = "ADD_SELECTED"
 export const REMOVE_SELECTED: string = "REMOVE_SELECTED"
 
-export const STORE_LINK_STATE: string = "STORE_LINK_STATE"
+export const SET_AVAILABLE: string = "SET_AVAILABLE"
+export const REMOVE_AVAILABLE: string = "REMOVE_AVAILABLE"

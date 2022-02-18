@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom"
 import { FaTimes } from "react-icons/fa"
 import axios from "axios"
 import { Loader, Center } from "../styles/componentStyles/loader"
-import ProductContext from "../context/placeContext/productContext"
+import ProductContext from "../context/productContext/productContext"
 import * as actionTypes from "../context/types"
 import {
   Button,
@@ -86,7 +86,7 @@ const Modal: FC = () => {
               </ModalCloseWrapper>
               <Heading className="text-center">{item.title}</Heading>
               <ModalImgContainer>
-                <ModalImg src={item.images[0].url} alt={item.name} />
+                <ModalImg src={item.images[0].url} alt={item.title} />
               </ModalImgContainer>
               <ModalDesc>
                 <li>

@@ -1,6 +1,6 @@
 import React, { FC, useState, useContext, useEffect } from "react"
 import { FaAngleDown } from "react-icons/fa"
-import ProductContext from "../context/placeContext/productContext"
+import ProductContext from "../context/productContext/productContext"
 import * as actionTypes from "../context/types"
 import axios from "axios"
 import {
