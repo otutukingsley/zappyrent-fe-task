@@ -1,5 +1,20 @@
 import React, { FC } from "react"
 import { Link } from "react-router-dom"
+import {
+  CardImg,
+  CardImgContainer,
+  DescNum,
+  Details,
+  NumPrice,
+  PlaceCards,
+  PlaceDesc,
+  Pricing,
+  PricingInner,
+  Rent,
+  RentPrice,
+  Type,
+} from "../styles/componentStyles/home"
+import { Heading } from "../styles/globalStyles"
 
 interface PlaceProps {
   item: any
@@ -9,42 +24,35 @@ const Places: FC<PlaceProps> = ({ item }) => {
   return (
     <>
       <Link to={`/img/${item.id}`} className="place-item">
-        <div className="place-card">
-          <div className="img-card-container">
-            <img
-              src={item.images[0].url}
-              alt={item.name}
-              className="place-img"
-            />
-          </div>
-          <div className="place-desc">
-            <h4 className="place-type">{item.type}</h4>
-            <h4 className="place-title">{item.title}</h4>
-            <ul className="details-desc">
-              <li className="details-desc-item">
-                <span className="desc-num">{item.tenants}</span> inquilini
+        <PlaceCards>
+          <CardImgContainer>
+            <CardImg src={item.images[0].url} alt={item.name} />
+          </CardImgContainer>
+          <PlaceDesc>
+            <Type>{item.type}</Type>
+            <Heading>{item.title}</Heading>
+            <Details>
+              <li>
+                <DescNum className="desc-num">{item.tenants}</DescNum> inquilini
               </li>
-              <li className="details-desc-item">
-                <span className="desc-num">{item.baths}</span> bagno
+              <li>
+                <DescNum className="desc-num">{item.baths}</DescNum> bagno
               </li>
-              <li className="details-desc-item">
-                <span className="desc-num">{item.beds}</span> letto
+              <li>
+                <DescNum className="desc-num">{item.beds}</DescNum> letto
               </li>
-            </ul>
-            <p className="actual-desc">
-              {item.description.substring(0, 90)}...
-            </p>
-          </div>
-          <div className="pricing-line">
-            <div className="pricing">
-              <p className="rent">canone d'affitto</p>
-              <p className="rent-price">
-                <span className="desc-num num-price">&euro; {item.price}</span>{" "}
-                /mese
-              </p>
-            </div>
-          </div>
-        </div>
+            </Details>
+            <Type>{item.description.substring(0, 90)}...</Type>
+          </PlaceDesc>
+          <Pricing>
+            <PricingInner>
+              <Rent>canone d'affitto</Rent>
+              <RentPrice>
+                <NumPrice>&euro; {item.price}</NumPrice> /mese
+              </RentPrice>
+            </PricingInner>
+          </Pricing>
+        </PlaceCards>
       </Link>
     </>
   )

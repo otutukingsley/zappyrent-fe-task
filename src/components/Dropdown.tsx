@@ -40,9 +40,6 @@ const Dropdown: FC = () => {
       }
 
       if (link[link.length - 1] === "&") link = link.slice(0, link.length - 1)
-      //store the link in local storage
-      //check if available in local localStorage//
-      //if available append the link and request it
 
       try {
         dispatch({

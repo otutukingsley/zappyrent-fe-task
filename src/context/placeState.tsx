@@ -16,7 +16,6 @@ export interface State {
   item: any
   dropdownItems: any
   selected: any
-  link: string
 }
 export type Dispatch = (action: Action) => void
 
@@ -29,7 +28,6 @@ const initialState = {
   single: true,
   dropLoading: true,
   selected: [],
-  link: `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties?`,
 }
 
 export function PlaceState({ children }: { children: ReactNode }) {

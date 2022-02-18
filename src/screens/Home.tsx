@@ -7,6 +7,12 @@ import Places from "../components/Places"
 import { Loader, Center } from "../styles/componentStyles/loader"
 import PlaceContext from "../context/placeContext"
 import * as actionTypes from "../context/types"
+import {
+  HomeSection,
+  Listings,
+  MainShowcase,
+  ShowPlaces,
+} from "../styles/componentStyles/home"
 
 const Home: FC = () => {
   const context = useContext(PlaceContext)
@@ -41,7 +47,7 @@ const Home: FC = () => {
     <div className="home">
       <Outlet />
       <Header />
-      <main className="main-showcase">
+      <MainShowcase>
         <Container>
           {loading ? (
             <Center>
@@ -50,17 +56,17 @@ const Home: FC = () => {
           ) : error ? (
             <h1>{error}</h1>
           ) : (
-            <div className="show-places">
-              <h3 className="places-heading">{items.length} allogi trovati</h3>
-              <div className="place-section">
+            <ShowPlaces>
+              <Listings>{items.length} allogi trovati</Listings>
+              <HomeSection>
                 {items.map((place: any) => (
                   <Places item={place} key={place.id} />
                 ))}
-              </div>
-            </div>
+              </HomeSection>
+            </ShowPlaces>
           )}
         </Container>
-      </main>
+      </MainShowcase>
     </div>
   )
 }

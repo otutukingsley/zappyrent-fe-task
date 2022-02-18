@@ -18,6 +18,9 @@ export const FGselect = styled.div`
     width: 6.5rem;
     padding: 0.5rem;
   }
+  @media (max-width: 300px) {
+    width: 100%;
+  }
 `
 
 export const DownArrow = styled.div`
@@ -81,35 +84,3 @@ export const CheckboxInner = styled.div`
   height: 100%;
   border-radius: 0.2rem;
 `
-
-// let link: any = localStorage.getItem("link")
-//   ? localStorage.getItem("link")
-//   : `https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties`
-
-// if (localStorage.getItem("link")) {
-//   if (selected.length > 0) {
-//     link =
-//       link[link.length - 1] === "&"
-//         ? link.slice(0, link.length - 1)
-//         : link
-//     link += "?"
-//     selected
-//       .filter((current: string) => current !== "available")
-//       .forEach((current: string) => {
-//         link += `type=${current}&`
-//       })
-//   }
-//   link =
-//     link[link.length - 1] === "&" ? link.slice(0, link.length - 1) : link
-//   localStorage.setItem("link", link)
-// } else {
-//   if (selected.length > 0) link += "?"
-//   selected
-//     .filter((current: string) => current !== "available")
-//     .forEach((current: string) => {
-//       link += `type=${current}&`
-//     })
-//   link =
-//     link[link.length - 1] === "&" ? link.slice(0, link.length - 1) : link
-//   localStorage.setItem("link", link)
-// }

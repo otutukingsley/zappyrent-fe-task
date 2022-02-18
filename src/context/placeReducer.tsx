@@ -105,11 +105,6 @@ const placeReducer = (state: State, action: Action) => {
           (current: any) => current !== action.payload
         ),
       }
-    case actionTypes.STORE_LINK_STATE:
-      return {
-        ...state,
-        link: action.payload,
-      }
 
     default:
       return state
