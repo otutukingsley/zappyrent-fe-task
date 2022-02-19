@@ -47,6 +47,7 @@ export const HeaderActions = styled.div`
     padding-left: 0;
     padding-right: 0;
     justify-content: center;
+    grid-gap: 1.313rem;
   }
   @media (max-width: 375px) {
     grid-gap: 1rem;

@@ -11,6 +11,7 @@ import {
   CustomCheckBox,
   CheckboxInner,
   CheckboxIn,
+  SelectFont,
 } from "../styles/componentStyles/dropdown"
 import { REQUEST_URL } from "../context/constants"
 
@@ -141,13 +142,13 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
         onClick={() => toggle()}
       >
         <div>
-          <p>
+          <SelectFont>
             {selected.length > 0 && selected.length <= 1
               ? selected[0]
               : selected.length > 1
               ? selected[0] + " +1"
               : "Tipologia"}
-          </p>
+          </SelectFont>
         </div>
         <DownArrow>
           <FaAngleDown className={`arrow-down ${open ? "rotate-svg" : ""}`} />

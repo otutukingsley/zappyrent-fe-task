@@ -12,7 +12,7 @@ export const FGselect = styled.div`
   position: relative;
 
   @media (max-width: 460px) {
-    width: 8rem;
+    width: 9.5rem;
   }
   @media (max-width: 325px) {
     width: 6.5rem;
@@ -83,4 +83,8 @@ export const CheckboxIn = styled.div`
 export const CheckboxInner = styled.div`
   height: 100%;
   border-radius: 0.2rem;
+`
+
+export const SelectFont = styled.p`
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
 `
