@@ -67,4 +67,4 @@ Feature implemented are soley based on the assignment description
 My development experience for this application was an interesting yet challenging one. I enjoyed the whole building process from scratch and the most challenging problem I faced during the development process was applying the filters via query string parameters. Overall it was a fun and interesting project to work on. 
 I have hosted the project on vercel for an easier way to test and inspect the project and below is a live link to the hosted project.
 
-Live link to [zappyrent-frontend-task-by-otutu](https://zappyrent-fe-task-q76wejs9q-otutukingsley.vercel.app/)
+Live link to [zappyrent-frontend-task-by-otutu](https://zappyrent-fe-task-a1ah9491e-otutukingsley.vercel.app/)
