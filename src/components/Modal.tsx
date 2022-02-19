@@ -36,6 +36,9 @@ const Modal: FC = () => {
   const modalRef = useRef<any>(null)
 
   useEffect(() => {
+    /* 
+  This function handles getting an individual product to display the Product Display Page through the product id
+  */
     const fetchPlace = async () => {
       try {
         dispatch({
@@ -63,6 +66,9 @@ const Modal: FC = () => {
     }
   }, [dispatch, id])
 
+  /* 
+  This function handles closing the modal on outside click
+  */
   const handleDismiss = (e: any) => {
     if (modalRef.current === e.target) {
       navigate(-1)

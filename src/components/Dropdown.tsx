@@ -54,6 +54,9 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
   const [open, setOpen] = useState<boolean>(false)
 
   useEffect(() => {
+    /* 
+  This function handles making the request URL for filtering by Query String params 
+  */
     const filterPlace = async () => {
       const { link } = requestLink(selected)
       try {
@@ -80,6 +83,9 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
   }, [dispatch, requestLink, selected])
 
   useEffect(() => {
+    /* 
+  This function handles fectching all items to populate the select dropdown
+  */
     const fetchPlaces = async () => {
       try {
         dispatch({
@@ -103,6 +109,9 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
     fetchPlaces()
   }, [dispatch])
 
+  /* 
+  This function handles showing or hiding the selected dropdown
+  */
   const toggle = () => {
     if (dropLoading) {
       return
@@ -110,6 +119,10 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
       setOpen(!open)
     }
   }
+
+  /* 
+  This function handles multiple selection of our dropdown, it takes a string value of item clicked and makes comparison to an array that holds the selected options
+  */
 
   const handleMultipleSelect = (itemType: string) => {
     if (!selected.some((current: string) => current === itemType)) {
@@ -124,6 +137,10 @@ const Dropdown: FC<DropdownProps> = ({ requestLink }) => {
       })
     }
   }
+
+  /* 
+  This function returns true if an option is selected or false if not
+  */
 
   const isItemSelected = (item: string) => {
     if (selected.find((current: string) => current === item)) {

@@ -21,6 +21,9 @@ const Home: FC = () => {
   const { state, dispatch } = context ? context : null!
   const { loading, items, error } = state
   useEffect(() => {
+    /* 
+  This function handles fetching all items from the provided API endpoint
+  */
     const fetchPlaces = async () => {
       try {
         dispatch({

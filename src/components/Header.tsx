@@ -20,6 +20,9 @@ const Header: FC = () => {
   const { selected, available } = state
   const [isChecked, setIsChecked] = useState<boolean>(false)
 
+  /* 
+  This function handles creating the request URL for filtering by Query String params 
+  */
   const requestLink = useCallback(
     (options: string[]) => {
       let link = REQUEST_URL
@@ -44,6 +47,9 @@ const Header: FC = () => {
   )
 
   useEffect(() => {
+    /* 
+  This function handles Making the request to filter by Query String params 
+  */
     const filterPlace = async () => {
       const { link } = requestLink(selected)
       try {
@@ -69,6 +75,9 @@ const Header: FC = () => {
     filterPlace()
   }, [dispatch, selected, isChecked, requestLink])
 
+  /* 
+  This function handles the available and unavailable state we have in the UI
+  */
   const onChange = () => {
     if (isChecked) {
       dispatch({
@@ -81,6 +90,7 @@ const Header: FC = () => {
     }
     setIsChecked(!isChecked)
   }
+
   return (
     <Heading>
       <Container>
