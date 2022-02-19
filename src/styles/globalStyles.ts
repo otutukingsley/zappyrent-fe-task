@@ -77,6 +77,7 @@ input[type="checkbox"]:checked::before {
   display: block;
   width: 100%;
   font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+  position: relative;
 }
 .close-icon{
   cursor: pointer;

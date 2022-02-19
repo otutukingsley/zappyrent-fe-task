@@ -42,6 +42,7 @@ export const PlaceCards = styled.div`
   -webkit-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
+  position: relative;
 `
 export const CardImgContainer = styled.div`
   width: 100%;
@@ -109,4 +110,14 @@ export const RentPrice = styled.p`
 export const NumPrice = styled.span`
   font-weight: 600;
   color: ${({ theme }) => theme.colors.black};
+`
+export const Tag = styled.div`
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  padding: 0.7rem 1.25rem;
+  border-radius: 2rem;
+  font-size: inherit;
+  color: ${({ theme }) => theme.colors.black};
+  background-color: ${({ theme }) => theme.colors.available};
 `

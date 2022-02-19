@@ -12,6 +12,7 @@ import {
   PricingInner,
   Rent,
   RentPrice,
+  Tag,
   Type,
 } from "../styles/componentStyles/home"
 import { Heading } from "../styles/globalStyles"
@@ -50,6 +51,7 @@ const Places: FC<PlaceProps> = ({ item }) => {
     <>
       <Link to={`/img/${item.id}`} className="place-item">
         <PlaceCards>
+          {item.available && <Tag>Disponibile subito</Tag>}
           <CardImgContainer>
             <CardImg src={item.images[0].url} alt={item.title} />
           </CardImgContainer>
