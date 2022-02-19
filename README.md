@@ -1,46 +1,70 @@
-# Getting Started with Create React App
+## Zappyrent Assessment for Frontend Position
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is an appplication that displays a product listing page at Zappyrent
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
+ * [Description](#description)
+ * [Technologies](#technologies)
+ * [Features](#features)
+ * [API Endpoints](#api-endpoints)
+ * [Getting Started](#getting-started)
+    * [Installation](#installation)
+    * [Conclusion](#conclusion)
 
-### `npm start`
+## Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The user should be able to see a listing page (PLP) of 12 property items (apartaments).
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+The user should be able to filter the PLP according to the following fields: `available` and `type`. The user should be informed when no apartaments are showed beacuse of filtering options.
 
-### `npm test`
+The following points will be considered plus:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- The user, clicking on an item of the PLP, should be able to view the details of that specific apartment in a modal window (a sort of detail page, PDP). This action must correspond to a change in the page url which must be unique for each item of the PLP. If the user lands directly on one of the specific URLs of the apartments, one should see the modal window already open, without the need for any click.
+- Use of TypeScript (strict mode)
+- Writing unit tests for the components created
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Technologies
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* [React](https://reactjs.org/) - Web Application Framework
+* [Styled Components](https://styled-components.com) - Styling Library
+* [TypeScript](https://www.typescriptlang.org) - Programming language
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Features
 
-### `npm run eject`
+Feature implemented are soley based on the assignment description
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Completed features
+* The user should be able to see a listing page (PLP) of 12 property items (apartaments)
+* The user should be able to filter the PLP according to the following fields: `available` and `type`. The user should be informed when no apartaments are showed beacuse of filtering options.
+* The user, clicking on an item of the PLP, should be able to view the details of that specific apartment in a modal window (a sort of detail page, PDP). This action must correspond to a change in the page url which must be unique for each item of the PLP. If the user lands directly on one of the specific URLs of the apartments, one should see the modal window already open, without the need for any click
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## API Endpoints
+* Endpoint: https://my-json-server.typicode.com/zappyrent/frontend-assessment/properties
+* Method: GET
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Query string parameters
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* `available`: true | false
+* `type`: 'Private Room' | 'Shared Room' | 'Entire Property' | 'Studio'
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Getting Started
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Installation
+
+* git clone
+  [zappyrent-fe-task](https://github.com/otutukingsley/zappyrent-fe-task.git)
+* Run npm install` to install packages
+* Run npm run build to build the project
+* Run npm start to start the server
+* Navigate to [localhost:3000](http://localhost:3000/) in browser to access the
+  application
+
+## Conclusion
+
+My development experience for this application was an interesting yet challenging one. I enjoyed the whole building process from scratch and the most challenging problem I faced during the development process was applying the filters via query string parameters. Overall it was a fun and interesting project to work on. 
+I have hosted the project on vercel for an easier way to test and inspect the project and below is a live link to the hosted project.
+
+Live link to [zappyrent-frontend-task-by-otutu](https://zappyrent-fe-task-q76wejs9q-otutukingsley.vercel.app/)
